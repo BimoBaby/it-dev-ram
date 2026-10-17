@@ -1,22 +1,11 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faAngellist } from '@fortawesome/free-brands-svg-icons/faAngellist';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
-import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons/faLinkedinIn';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons/faEnvelope';
 
 import profile from './profile.json';
 
-export type ContactId =
-  | 'linkedin'
-  | 'github'
-  | 'x'
-  | 'angellist'
-  | 'instagram'
-  | 'facebook'
-  | 'email';
+export type ContactId = 'linkedin' | 'facebook' | 'email';
 
 export interface ContactItem {
   id: ContactId;
@@ -28,37 +17,13 @@ export interface ContactItem {
 const data: ContactItem[] = [
   {
     id: 'linkedin',
-    link: 'https://www.linkedin.com/in/michaelldangelo',
+    link: 'https://www.linkedin.com/in/ray-andrew-manila-2126b4275/',
     label: 'LinkedIn',
     icon: faLinkedinIn,
   },
   {
-    id: 'github',
-    link: 'https://github.com/mldangelo',
-    label: 'GitHub',
-    icon: faGithub,
-  },
-  {
-    id: 'x',
-    link: 'https://x.com/dangelosaurus',
-    label: 'X',
-    icon: faTwitter,
-  },
-  {
-    id: 'angellist',
-    link: 'https://angel.co/michael-d-angelo',
-    label: 'Angel List',
-    icon: faAngellist,
-  },
-  {
-    id: 'instagram',
-    link: 'https://www.instagram.com/dangelosaurus/',
-    label: 'Instagram',
-    icon: faInstagram,
-  },
-  {
     id: 'facebook',
-    link: 'https://facebook.com/d',
+    link: 'https://www.facebook.com/profile.php?id=100092542480793',
     label: 'Facebook',
     icon: faFacebookF,
   },

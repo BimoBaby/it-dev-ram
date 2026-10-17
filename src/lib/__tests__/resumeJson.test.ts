@@ -133,14 +133,14 @@ describe('json resume document', () => {
 
     expect(resume.basics.profiles).toHaveLength(socials.length);
     expect(resume.basics.profiles).toContainEqual({
-      network: 'GitHub',
-      username: 'mldangelo',
-      url: 'https://github.com/mldangelo',
+      network: 'LinkedIn',
+      username: 'ray-andrew-manila-2126b4275',
+      url: 'https://www.linkedin.com/in/ray-andrew-manila-2126b4275/',
     });
     expect(resume.basics.profiles).toContainEqual({
-      network: 'LinkedIn',
-      username: 'michaelldangelo',
-      url: 'https://www.linkedin.com/in/michaelldangelo',
+      network: 'Facebook',
+      username: 'profile.php',
+      url: 'https://www.facebook.com/profile.php?id=100092542480793',
     });
     expect(
       resume.basics.profiles.every((entry) => entry.username.length > 0),

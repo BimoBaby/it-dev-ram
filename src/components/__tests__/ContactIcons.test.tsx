@@ -7,21 +7,33 @@ describe('ContactIcons', () => {
   it('renders contact icons', () => {
     render(<ContactIcons />);
 
-    // Check if GitHub link is present
-    const githubLink = screen.getByRole('link', { name: /github/i });
-    expect(githubLink).toBeInTheDocument();
-    expect(githubLink).toHaveAttribute(
+    const linkedin = screen.getByRole('link', { name: /linkedin/i });
+    expect(linkedin).toHaveAttribute(
       'href',
-      expect.stringContaining('github.com'),
+      'https://www.linkedin.com/in/ray-andrew-manila-2126b4275/',
     );
 
-    // Check if email link is present
+    const facebook = screen.getByRole('link', { name: /facebook/i });
+    expect(facebook).toHaveAttribute(
+      'href',
+      'https://www.facebook.com/profile.php?id=100092542480793',
+    );
+
     const emailLink = screen.getByRole('link', { name: /email/i });
-    expect(emailLink).toBeInTheDocument();
     expect(emailLink).toHaveAttribute(
       'href',
-      expect.stringContaining('mailto:'),
+      'mailto:manilarayandrew@gmail.com',
     );
+    expect(
+      screen.queryByRole('link', { name: /github/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /instagram/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^x$/i })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /angel list/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('has correct number of contact links', () => {
@@ -36,6 +48,6 @@ describe('ContactIcons', () => {
     expect(
       screen.queryByRole('link', { name: /email/i }),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument();
   });
 });

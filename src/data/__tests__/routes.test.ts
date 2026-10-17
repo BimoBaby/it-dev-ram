@@ -70,7 +70,7 @@ describe('routes', () => {
       .filter((route) => route.primary === false)
       .map((route) => route.path);
 
-    expect(secondaryPaths).toEqual(['/stats']);
+    expect(secondaryPaths).toEqual([]);
   });
 
   /**
@@ -87,7 +87,6 @@ describe('routes', () => {
       '/about',
       '/resume',
       '/projects',
-      '/writing',
       '/contact',
     ]);
   });

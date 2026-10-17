@@ -71,6 +71,7 @@ const data: Project[] = [
   {
     title: 'Frontend Developer for Event Management System (EMS)',
     subtitle: 'YouCode Technologies Corp',
+    link: 'https://www.eventmanage.biz/events/n1OLK8jAEe3Y/view',
     sourceWork: 'YouCode Technologies Corp',
     date: '2024-02-01',
     endDate: '2026-03-01',
@@ -81,6 +82,7 @@ const data: Project[] = [
   {
     title: 'Frontend Developer for School Management Information System (SMIS)',
     subtitle: 'YouCode Technologies Corp',
+    link: 'https://youguard.ph/',
     sourceWork: 'YouCode Technologies Corp',
     date: '2024-02-01',
     endDate: '2026-03-01',
@@ -109,12 +111,12 @@ const data: Project[] = [
     status: 'shipped',
   },
   {
-    title: 'Nearest Dollar',
-    subtitle: 'BVP Hackathon',
+    title: 'alPar Trading Inc',
+    subtitle: '',
     image: '/images/projects/nearestdollar.jpg',
-    date: '2015-11-20',
-    desc: 'Connected to bank accounts to round up purchases and donate spare change to charity.',
-    tech: ['React', 'Node.js', 'Plaid API', 'MongoDB'],
+    date: '2026-5-1',
+    desc: 'A modern business website built with React, Tailwind CSS, Vite, and Supabase for backend services.',
+    tech: ['React", "Tailwind CSS", "Vite", "Supabase'],
     status: 'archive',
   },
   {

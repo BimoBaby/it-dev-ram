@@ -60,7 +60,6 @@ export default function ResumePage() {
   // One read, shared by the headline span and every tenure; baked at build time.
   const now = Date.now();
   const careerSpan = careerSpanYears(work, now);
-  const github = contactLink('github');
   const linkedin = contactLink('linkedin');
 
   return (
@@ -97,10 +96,7 @@ export default function ResumePage() {
             <span>{profile.currentCity}</span>
             <span>+63 945 560 0851</span>
             <span>+63 991 339 1337</span>
-            <a href="mailto:manilarayandrew@gmail.com">
-              manilarayandrew@gmail.com
-            </a>
-            <a href={github}>{displayUrl(github)}</a>
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
             <a href={linkedin}>{displayUrl(linkedin)}</a>
           </address>
         </header>

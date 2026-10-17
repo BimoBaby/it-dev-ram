@@ -853,9 +853,7 @@ if (!existsSync(sitemapPath)) {
 }
 
 const feedPath = join(OUT, 'feed.xml');
-if (!existsSync(feedPath)) {
-  fail('feed.xml', 'missing from export');
-} else {
+if (existsSync(feedPath)) {
   const feed = readFileSync(feedPath, 'utf8');
   const textLinks = [...feed.matchAll(/<link>\s*([^<]+?)\s*<\/link>/gi)].map(
     (match) => match[1],

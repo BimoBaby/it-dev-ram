@@ -269,9 +269,9 @@ describe('print: contact block', () => {
     expect(text).toContain(profile.currentCity);
     expect(text).toContain('+63 945 560 0851');
     expect(text).toContain('+63 991 339 1337');
-    expect(text).toContain('manilarayandrew@gmail.com');
-    expect(text).toContain('github.com/mldangelo');
-    expect(text).toContain('linkedin.com/in/');
+    expect(text).toContain(profile.email);
+    expect(text).toContain('linkedin.com/in/ray-andrew-manila-2126b4275');
+    expect(text).not.toContain('github.com');
   });
 
   it('links to the same destinations the footer does', () => {
@@ -281,7 +281,7 @@ describe('print: contact block', () => {
       a.getAttribute('href'),
     );
 
-    for (const id of ['github', 'linkedin'] as const) {
+    for (const id of ['linkedin'] as const) {
       const expected = contact.find((entry) => entry.id === id)?.link;
 
       expect(expected).toBeTruthy();
@@ -298,7 +298,7 @@ describe('print: contact block', () => {
       rule.selectors.includes('.resume-print-contact > *'),
     );
 
-    expect(block.children).toHaveLength(6);
+    expect(block.children).toHaveLength(5);
     expect(block.querySelector('[aria-hidden="true"]')).toBeNull();
 
     // A separator carried inside an entry lands wherever that entry lands, so
