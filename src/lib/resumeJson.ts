@@ -69,7 +69,7 @@ interface ResumeBasics {
 interface ResumeWork {
   name: string;
   position: string;
-  url: string;
+  url?: string;
   startDate: string;
   endDate?: string;
   summary?: string;
@@ -81,6 +81,7 @@ interface ResumeEducation {
   url: string;
   studyType?: string;
   area?: string;
+  startDate?: string;
   endDate: string;
   courses?: string[];
 }
@@ -210,7 +211,7 @@ function buildWork(): ResumeWork[] {
   return sortPositions(work).map((position) => ({
     name: position.name,
     position: position.position,
-    url: position.url,
+    ...(position.url ? { url: position.url } : {}),
     startDate: position.startDate,
     ...(position.endDate ? { endDate: position.endDate } : {}),
     ...(position.summary ? { summary: toPlainText(position.summary) } : {}),
@@ -250,6 +251,7 @@ function buildEducation(): ResumeEducation[] {
       institution: degree.school,
       url: degree.link,
       ...splitDegree(degree.degree),
+      ...(degree.startYear ? { startDate: String(degree.startYear) } : {}),
       endDate: String(degree.year),
       ...(schoolCourses.length > 0 ? { courses: schoolCourses } : {}),
     };

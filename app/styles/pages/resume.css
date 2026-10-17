@@ -8,6 +8,7 @@
 .resume-page .experience .title,
 .resume-page .skills .title,
 .resume-page .courses .title,
+.resume-page .project-experience .title,
 .resume-page .references .title {
   margin-bottom: 2.5rem;
   text-align: left;
@@ -17,6 +18,7 @@
 .resume-page .experience .title h2,
 .resume-page .skills .title h2,
 .resume-page .courses .title h2,
+.resume-page .project-experience .title h2,
 .resume-page .references .title h2 {
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
@@ -40,6 +42,32 @@
 
 .resume-page .courses {
   padding-top: 1em;
+}
+
+.resume-page .project-experience {
+  padding-top: 1em;
+}
+
+.resume-page .project-experience-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.resume-page .project-experience-list li {
+  margin-bottom: 1.25rem;
+}
+
+.resume-page .project-experience-list h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 0.35rem;
+}
+
+.resume-page .project-experience-list p {
+  margin: 0;
+  color: var(--color-fg-light);
 }
 
 .resume-page .courses .course-list {

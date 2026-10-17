@@ -16,13 +16,14 @@ describe('work data', () => {
     for (const job of work) {
       expect(job).toHaveProperty('name');
       expect(job).toHaveProperty('position');
-      expect(job).toHaveProperty('url');
       expect(job).toHaveProperty('startDate');
 
       expect(typeof job.name).toBe('string');
       expect(typeof job.position).toBe('string');
-      expect(typeof job.url).toBe('string');
       expect(typeof job.startDate).toBe('string');
+      if (job.url !== undefined) {
+        expect(typeof job.url).toBe('string');
+      }
     }
   });
 
@@ -40,14 +41,14 @@ describe('work data', () => {
     const urlRegex = /^https?:\/\/.+/;
 
     for (const job of work) {
+      if (!job.url) continue;
       expect(job.url).toMatch(urlRegex);
     }
   });
 
-  // Resume should show at least one current/active position
-  it('has at least one current position (no endDate)', () => {
+  it('records every role with an end date', () => {
     const currentJobs = work.filter((job) => !job.endDate);
-    expect(currentJobs.length).toBeGreaterThanOrEqual(1);
+    expect(currentJobs).toHaveLength(0);
   });
 
   it('highlights are arrays when present', () => {

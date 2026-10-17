@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
 import { aboutMarkdown } from '@/data/about';
-import profile from '@/data/profile.json';
 import { extractLogMarker } from '../logEntry';
 
 /** Bullets of one about-page section, as authored. */
@@ -185,71 +184,25 @@ describe('extractLogMarker', () => {
 });
 
 describe('the about page log', () => {
-  const history = sectionEntries('Some History');
+  const history = sectionEntries('Work History');
 
   it('annotates every history entry with only its stated marker', () => {
-    expect(history).toHaveLength(15);
+    expect(history).toHaveLength(6);
 
     expect(
       history.map((entry) => {
         const { year, age } = extractLogMarker(entry) ?? {};
         return [year, age].filter(Boolean).join(' / ');
       }),
-    ).toEqual([
-      '1993 / Age 3',
-      '1995',
-      '1996',
-      'Age 7',
-      'Age 8',
-      'Age 10',
-      'Age 11',
-      'Age 12',
-      'Age 13',
-      'Age 14',
-      'Age 14–17',
-      'Age 16',
-      'Age 18',
-      'Age 19',
-      'Age 20',
-    ]);
+    ).toEqual(['2014', '2017', '2020', '2023', '2024', '']);
   });
 
-  it('starts at the year the profile says the computing started', () => {
-    // `profile.computingSince` and the Tandy in the bedroom are the same fact;
-    // the log opened with an empty gutter while the stats page claimed 1993.
-    expect(extractLogMarker(history[0])?.year).toBe(
-      String(profile.computingSince),
-    );
-  });
+  it('keeps the overlapping college roles in the 2017 entry', () => {
+    const transition = history.find((entry) => entry.includes('2017'));
+    const marker = extractLogMarker(transition ?? '');
 
-  it('keeps the seasonal qualifier in the real MegaRace entry', () => {
-    const megaRace = history.find((entry) => entry.includes('MegaRace'));
-    const marker = extractLogMarker(megaRace ?? '');
-
-    expect(marker?.year).toBe('1996');
-    expect(marker?.age).toBeUndefined();
-    expect(marker?.rest).toContain('In the summer of 1996');
-  });
-
-  it('leaves undated travel entries empty and does not derive travel ages', () => {
-    const travel = sectionEntries('Travel / Geography');
-    const undated = travel.filter((entry) => extractLogMarker(entry) === null);
-    const dated = travel
-      .map((entry) => extractLogMarker(entry))
-      .filter((marker) => marker !== null);
-
-    expect(undated).toHaveLength(3);
-    expect(dated).toHaveLength(8);
-    expect(dated.map((marker) => marker.year)).toEqual([
-      '2016',
-      '2017',
-      '2018',
-      '2019',
-      '2020',
-      '2021',
-      '2022',
-      '2023',
-    ]);
-    expect(dated.every((marker) => marker.age === undefined)).toBe(true);
+    expect(marker?.year).toBe('2017');
+    expect(marker?.rest).toContain('Junior Frontend Web Developer');
+    expect(marker?.rest).toContain('until I graduated in 2020');
   });
 });

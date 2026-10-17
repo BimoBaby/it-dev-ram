@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import contact from '@/data/contact';
 import profile from '@/data/profile.json';
-import courses from '@/data/resume/courses';
 import degrees from '@/data/resume/degrees';
 import { categories, skills } from '@/data/resume/skills';
 import work from '@/data/resume/work';
@@ -123,7 +122,10 @@ describe('json resume document', () => {
   });
 
   it('splits the display city into city and region without asserting a country', () => {
-    expect(resume.basics.location).toEqual({ city: 'New York', region: 'NY' });
+    expect(resume.basics.location).toEqual({
+      city: 'Bacoor Cavite',
+      region: 'Philippines',
+    });
   });
 
   it('lists every non-email contact as a profile with its handle', () => {
@@ -150,27 +152,24 @@ describe('json resume document', () => {
       sortPositions(work).map((position) => position.name),
     );
     expect(resume.work[0]).toMatchObject({
-      name: 'OpenAI',
-      position: work[0].position,
-      url: work[0].url,
-      startDate: work[0].startDate,
+      name: 'YouCode Technologies Corp',
+      position: 'System Developer',
+      startDate: '2024-02-01',
+      endDate: '2026-03-01',
     });
   });
 
-  it('omits endDate for the current role rather than inventing one', () => {
-    expect(resume.work[0]).not.toHaveProperty('endDate');
-    expect(resume.work[1].endDate).toBe('2026-03-09');
+  it('keeps the end date the résumé states for a finished role', () => {
+    expect(resume.work[0].endDate).toBe('2026-03-01');
+    expect(resume.work[1].endDate).toBe('2024-01-01');
   });
 
-  it('reduces summaries carrying inline anchors to plain text', () => {
-    expect(resume.work[0].summary).toBe(
-      'Building Promptfoo and Codex Security at OpenAI, with a focus on securing AI systems and applying AI to software security.',
+  it('keeps role highlights as plain text', () => {
+    const youcode = resume.work.find(
+      (position) => position.name === 'YouCode Technologies Corp',
     );
 
-    const arthena = resume.work.find((position) => position.name === 'Arthena');
-    expect(arthena?.summary).toContain(
-      'backed by Anthemis, Foundation Capital, and Y Combinator',
-    );
+    expect(youcode?.highlights?.[0]).toContain('Vue.js and Next.js');
   });
 
   it('leaves no markup or uncollapsed whitespace anywhere in the prose', () => {
@@ -200,28 +199,17 @@ describe('json resume document', () => {
   it('splits the degree string into studyType and area', () => {
     expect(resume.education).toHaveLength(degrees.length);
     expect(resume.education[0]).toMatchObject({
-      institution: 'Stanford University',
-      url: 'https://stanford.edu',
-      studyType: 'M.S.',
-      area: 'Computational and Mathematical Engineering (ICME)',
-      endDate: '2016',
+      institution: 'AMA Computer University – Sta. Cruz Laguna Branch',
+      url: 'https://www.amaes.edu.ph/',
+      area: 'Bachelor of Science in Information Technology',
+      startDate: '2017',
+      endDate: '2020',
     });
-    expect(resume.education[1]).toMatchObject({
-      institution: 'University at Buffalo',
-      studyType: 'B.S.',
-      area: 'Electrical Engineering, Computer Engineering',
-      endDate: '2012',
-    });
+    expect(resume.education[0]).not.toHaveProperty('studyType');
   });
 
   it('files coursework under the school it was taken at', () => {
-    expect(resume.education[0].courses).toHaveLength(courses.length);
-    expect(resume.education[0].courses).toContain(
-      'EE 364a - Convex Optimization',
-    );
-    // Every course in the data is a Stanford course, so Buffalo carries none
-    // rather than an empty array.
-    expect(resume.education[1]).not.toHaveProperty('courses');
+    expect(resume.education[0]).not.toHaveProperty('courses');
   });
 
   it('files each course under exactly one degree', async () => {
@@ -232,7 +220,7 @@ describe('json resume document', () => {
     // superstring name is the case the current data cannot express.
     expect(
       resume.education.flatMap((entry) => entry.courses ?? []),
-    ).toHaveLength(courses.length);
+    ).toHaveLength(0);
 
     vi.resetModules();
     vi.doMock('@/data/resume/degrees', () => ({
@@ -254,9 +242,7 @@ describe('json resume document', () => {
       const education = buildWithSecondSchool().education;
 
       expect(education).toHaveLength(degrees.length + 1);
-      expect(education.flatMap((entry) => entry.courses ?? [])).toHaveLength(
-        courses.length,
-      );
+      expect(education.flatMap((entry) => entry.courses ?? [])).toHaveLength(0);
       expect(education.at(-1)).not.toHaveProperty('courses');
     } finally {
       vi.doUnmock('@/data/resume/degrees');

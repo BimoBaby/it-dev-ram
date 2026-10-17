@@ -225,18 +225,7 @@ describe('projects data', () => {
     });
   });
 
-  it('distinguishes Promptfoo project continuity from the founding role', () => {
-    const promptfoo = projects.find((project) => project.title === 'Promptfoo');
-    const role = work.find((position) => position.name === 'Promptfoo');
-
-    expect(promptfoo?.ongoing).toBe(true);
-    expect(promptfoo?.subtitle).toMatch(/through acquisition/i);
-    expect(promptfoo?.subtitle).toMatch(/continued at OpenAI/i);
-    expect(role?.endDate).toBe('2026-03-09');
-  });
-
   it('keeps reviewed destination and chronology corrections in place', () => {
-    const arthena = projects.find((project) => project.title === 'Arthena');
     const spacePotato = projects.find(
       (project) => project.title === 'Space Potato',
     );
@@ -244,17 +233,14 @@ describe('projects data', () => {
       (project) => project.title === 'Cat Detector',
     );
 
-    expect(arthena?.link).toBe('https://www.ycombinator.com/companies/arthena');
     expect(spacePotato?.link).toBeUndefined();
     expect(catDetector?.tech).not.toContain('TensorFlow');
   });
 
   it('uses established brand and technology capitalization', () => {
     const harvest = projects.find((project) => project.title === 'Harvest');
-    const arthena = projects.find((project) => project.title === 'Arthena');
 
     expect(harvest?.subtitle).toContain('TechCrunch');
     expect(harvest?.tech).toContain('Computer vision');
-    expect(arthena?.tech).toContain('Microservices');
   });
 });

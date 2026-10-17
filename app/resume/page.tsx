@@ -1,26 +1,26 @@
 import type { Metadata } from 'next';
 
-import Courses from '@/components/Resume/Courses';
 import Education from '@/components/Resume/Education';
 import Experience from '@/components/Resume/Experience';
+import ProjectExperience from '@/components/Resume/ProjectExperience';
 import References from '@/components/Resume/References';
 import ResumeNav from '@/components/Resume/ResumeNav';
 import Skills from '@/components/Resume/Skills';
 import PageWrapper from '@/components/Template/PageWrapper';
 import contact, { type ContactId } from '@/data/contact';
 import profile from '@/data/profile.json';
-import courses from '@/data/resume/courses';
 import degrees from '@/data/resume/degrees';
+import projectExperience from '@/data/resume/projectExperience';
 import { categories, skills } from '@/data/resume/skills';
 import work from '@/data/resume/work';
 import { careerSpanYears } from '@/lib/career';
 import { createPageMetadata } from '@/lib/metadata';
 import { RESUME_JSON_PATH, RESUME_JSON_URL } from '@/lib/resumeJson';
-import { AUTHOR_NAME, SITE_URL } from '@/lib/utils';
+import { AUTHOR_NAME } from '@/lib/utils';
 
 const resumeMetadata = createPageMetadata({
   title: 'Resume',
-  description: `${AUTHOR_NAME}'s Resume. OpenAI, Promptfoo, Smile ID, Arthena, Matroid, Stanford ICME, YC alum.`,
+  description: `${AUTHOR_NAME}'s resume. System Developer at YouCode Technologies Corp and Full Stack Developer at Sharks Billiard Association. B.S. Information Technology, AMA Computer University.`,
   path: '/resume/',
 });
 
@@ -83,20 +83,23 @@ export default function ResumePage() {
             </a>
           </div>
           <p className="resume-summary">
-            Engineering leader with a career spanning {careerSpan}+ years across
-            AI, security, and infrastructure. I&apos;m currently a Member of the
-            Technical Staff at OpenAI, working on Promptfoo and Codex Security.
-            I help secure AI systems and use AI to find software
-            vulnerabilities. I co-founded Promptfoo before it joined OpenAI in
-            2026. Stanford MS, YC alum, previously VP Engineering.
+            Full stack and system developer with a career spanning {careerSpan}
+            + years. I build web applications with Vue.js, Next.js, React,
+            Laravel, Drupal, and the MERN stack. Most recently I was a System
+            Developer at YouCode Technologies Corp, and before that a Full
+            Stack Developer at Sharks Billiard Association. B.S. Information
+            Technology, AMA Computer University.
           </p>
           {/* Print-only, but real markup rather than CSS `content`, so it is
               selectable and linkable. Destinations come from shared contact
               data, while the location comes from the shared profile. */}
           <address className="resume-print-contact">
             <span>{profile.currentCity}</span>
-            <a href={`${SITE_URL}/`}>{displayUrl(SITE_URL)}</a>
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            <span>+63 945 560 0851</span>
+            <span>+63 991 339 1337</span>
+            <a href="mailto:manilarayandrew@gmail.com">
+              manilarayandrew@gmail.com
+            </a>
             <a href={github}>{displayUrl(github)}</a>
             <a href={linkedin}>{displayUrl(linkedin)}</a>
           </address>
@@ -117,8 +120,8 @@ export default function ResumePage() {
             <Skills skills={skills} categories={categories} />
           </section>
 
-          <section id="courses" className="resume-section">
-            <Courses data={courses} />
+          <section id="projects" className="resume-section">
+            <ProjectExperience data={projectExperience} />
           </section>
 
           <section id="references" className="resume-section">

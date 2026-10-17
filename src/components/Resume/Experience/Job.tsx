@@ -54,9 +54,13 @@ export default function Job({ data, tier = 'primary', now }: JobProps) {
       <div className="job-body">
         <header>
           <h3>
-            <a href={url} className="job-company">
-              {name}
-            </a>
+            {url ? (
+              <a href={url} className="job-company">
+                {name}
+              </a>
+            ) : (
+              <span className="job-company">{name}</span>
+            )}
             <span className="job-position">{position}</span>
           </h3>
         </header>

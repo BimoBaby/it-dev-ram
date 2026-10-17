@@ -2,7 +2,11 @@
 export interface Position {
   name: string;
   position: string;
-  url: string;
+  /**
+   * Public company site, when the résumé names one. Omitted rather than
+   * guessed: a printed résumé reveals this href as text.
+   */
+  url?: string;
   startDate: string;
   endDate?: string;
   /**
@@ -17,138 +21,29 @@ export interface Position {
 
 const work: Position[] = [
   {
-    name: 'OpenAI',
-    position: 'Member of the Technical Staff',
-    url: 'https://openai.com',
-    startDate: '2026-03-09',
-    summary: `Building Promptfoo and <a href='https://openai.com/index/codex-security-now-in-research-preview/'>Codex Security</a>
-    at OpenAI, with a focus on securing AI systems and applying AI to software security.`,
-  },
-  {
-    name: 'Promptfoo',
-    position: 'Co-founder & CTO',
-    url: 'https://promptfoo.dev',
-    startDate: '2024-07-01',
-    endDate: '2026-03-09',
-    summary: `Promptfoo started as a developer-first eval tool and grew into a platform
-    for AI security, red-teaming, and compliance. It reached more than 350,000 developers, 130,000
-    monthly active users, and teams at more than 25% of the Fortune 500 before joining OpenAI in 2026.`,
+    name: 'YouCode Technologies Corp',
+    position: 'System Developer',
+    startDate: '2024-02-01',
+    endDate: '2026-03-01',
     highlights: [
-      'Owned company-wide technical strategy and product roadmap across open-source adoption, commercial product, and research investments.',
-      'Co-led Promptfoo through its acquisition by OpenAI in March 2026.',
-      'Helped turn Promptfoo from an open-source eval tool into an enterprise AI security product used by large companies and frontier labs.',
-      'Built and scaled the company from founding to 23 people across engineering, GTM, and operations.',
-      'Led technical due diligence and fundraising through $23.4M in venture financing from Insight Partners and Andreessen Horowitz.',
-      'Led development of core evaluation framework, vulnerability scanning, static analysis, and automated red-teaming capabilities.',
+      'Developed and maintained high-performance web applications using Vue.js and Next.js, optimizing frontend interfaces and full-stack features to enhance client experience.',
+      'Engineered and integrated RESTful APIs using Laravel, streamlining data communication between frontend interfaces and backend services to improve system modularity.',
+      'Standardized local development environments with Laragon, eliminating environment-related deployment inconsistencies.',
+      'Collaborated with UI/UX designers in Figma to translate prototypes into pixel-perfect, responsive frontend components.',
+      'Managed version control and team collaboration using GitHub, implementing branching strategies and code review workflows to streamline feature delivery and maintain high code quality.',
+      'Utilized the MERN stack (MongoDB, Express.js, React.js, and Node.js) to develop and maintain responsive full-stack web applications and RESTful APIs.',
+      'Built dynamic frontend interfaces with React and integrated backend services and database operations using Node.js, Express, and MongoDB.',
+      'Utilized Drupal 10.5 for website content management, module configuration, and frontend customization for client needs.',
+      'Used Composer and Drush to manage Drupal dependencies, install and update modules, clear cache, and streamline development and maintenance workflows.',
     ],
   },
   {
-    name: 'Smile ID',
-    position: 'VP Engineering & Head of AI',
-    url: 'https://smile.id',
-    startDate: '2022-01-01',
-    endDate: '2024-07-01',
-    summary: `Smile Identity provides ML-powered identity verification APIs used by banks, fintechs, and
-    telcos across Africa. Promoted from Director to VP Engineering to VP Engineering & Head of AI within one year,
-    leading teams building APIs that now process hundreds of millions of identity checks.`,
+    name: 'Sharks Billiard Association',
+    position: 'Full Stack Developer',
+    startDate: '2023-01-01',
+    endDate: '2024-01-01',
     highlights: [
-      'Owned engineering org design, headcount planning, and hiring across backend and ML teams, growing to 20+ engineers.',
-      'Transformed engineering velocity from weekly releases to continuous deployment, migrating to TypeScript, adding tests in CI, and leading ceremonies.',
-      'Re-architected inference APIs on AWS Lambda, scaling from 1,000 to 1M+ users per day and cutting job time from 30+ seconds to 7 seconds.',
-      'Built computer vision pipelines for liveness detection certification.',
-      'Pitched, designed, and shipped a fraud detection product using 1-N facial recognition with embeddings and vector search.',
-    ],
-  },
-  {
-    name: 'Skeptical Investments',
-    position: 'Co-founder',
-    url: 'https://skepticalinvestments.biz',
-    startDate: '2017-04-01',
-    commitment: 'part-time',
-    summary: `Skeptical Investments is a micro-VC fund focused on early-stage technical founders,
-    with investments in ML, infrastructure, and space startups.`,
-    highlights: [
-      'Created InstaSafe, a tool that automates YC-standard investment documents.',
-      'Advise portfolio founders on ML, infrastructure, hiring, and fundraising strategy.',
-    ],
-  },
-  {
-    name: 'Arthena',
-    position: 'Co-founder & CTO',
-    url: 'https://www.ycombinator.com/companies/arthena',
-    startDate: '2014-01-01',
-    endDate: '2022-01-01',
-    summary: `Arthena was a quantitative art investment platform backed by <a href='https://www.anthemis.com/'>Anthemis</a>,
-    <a href='https://foundationcapital.com'>Foundation Capital</a>, and <a href='https://ycombinator.com'>Y Combinator</a>.
-    Built Arthena from idea into a quantitative art-investment platform; Masterworks later acquired the company in 2023.`,
-    highlights: [
-      'Co-founded Arthena and led technical strategy; sat on board and led fundraising, including debt financing for a 9-figure investment vehicle in the auction guarantee market.',
-      'Built and managed a cross-functional team of 20 engineers, data scientists, and analysts.',
-      'Built data pipelines, quantitative research tools, and visualization systems to scale investment research and augment analyst decision-making.',
-      'Developed valuation models on irregularly-sampled time series using graph embeddings, probabilistic forecasting with calibrated prediction intervals, and online learning with walk-forward validation.',
-      'Designed a microservices architecture for data collection, feature engineering, backtesting, and reporting.',
-    ],
-  },
-  {
-    name: 'Matroid',
-    position: 'Co-founder',
-    url: 'https://matroid.com',
-    startDate: '2015-09-01',
-    endDate: '2016-06-01',
-    summary: `Matroid is a computer vision platform for creating and deploying detectors, now funded by
-    <a href='https://www.nea.com'>NEA</a> and <a href='https://www.accel.com'>Accel</a>. I co-founded
-    the company and built the initial product through our first fundraise.`,
-    highlights: [
-      'Defined company vision and product strategy.',
-      'Architected and built the initial detector platform for identifying objects, events, and patterns in video.',
-      'Led technical fundraising efforts for seed round.',
-    ],
-  },
-  {
-    name: 'Planet',
-    position: 'Avionics Intern',
-    url: 'https://planet.com',
-    startDate: '2014-06-01',
-    endDate: '2015-01-01',
-    highlights: [
-      'Built models for cloud detection and optimal exposure using Earth albedo, incorporating sensor physics, astronomy, and optics.',
-      'Worked with optics and camera hardware; developed satellite software in C++ and Python (OpenCV, NumPy, SciPy).',
-    ],
-  },
-  {
-    name: 'Planetary Resources',
-    position: 'Avionics Intern',
-    url: 'https://en.wikipedia.org/wiki/Planetary_Resources',
-    startDate: '2014-01-01',
-    endDate: '2014-05-01',
-    highlights: [
-      'Developed simulations for Attitude Determination and Control Subsystem.',
-      'Built flight hardware for Electrical Power Subsystem in clean room; performed thermal vacuum chamber testing.',
-    ],
-  },
-  {
-    name: 'Facebook',
-    position: 'Software Engineering Intern',
-    url: 'https://facebook.com',
-    startDate: '2013-06-01',
-    endDate: '2013-09-01',
-    highlights: [
-      "Worked on Facebook's first GPU compute team, benchmarking NVIDIA GPUs for initial data center deployment.",
-      'Built log collection software and performed statistical analysis in Python, Hack, R, and HQL.',
-    ],
-  },
-  {
-    name: 'UB Nanosatellite Program',
-    position: 'Program Manager',
-    url: 'https://ubnl.space/',
-    startDate: '2011-06-01',
-    endDate: '2012-05-01',
-    summary:
-      'Led a 60-person student team through the satellite development lifecycle for the AFRL University Nanosatellite Program.',
-    highlights: [
-      'Co-authored grant proposal to design and build a multi-spectral imaging satellite.',
-      'Established budget and schedule from initial concept through design reviews.',
-      'Designed ADCS and worked on sensor integration.',
+      'Designed and developed the user interface of a stat collector web application using React and Tailwind CSS, keeping each module simple and user-friendly.',
     ],
   },
 ];

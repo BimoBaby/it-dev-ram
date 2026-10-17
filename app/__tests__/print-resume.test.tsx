@@ -122,7 +122,7 @@ describe('print: revealing link destinations', () => {
     );
     expect(
       container.querySelectorAll('.course-container a[href]'),
-    ).toHaveLength(courses.length);
+    ).toHaveLength(0);
   });
 });
 
@@ -178,13 +178,15 @@ describe('print: resume link data', () => {
   // Job and degree links are printed as text; course links remain PDF
   // annotations. All three need absolute destinations.
   const links = [
-    ...work.map((job) => job.url),
+    ...work.flatMap((job) => (job.url ? [job.url] : [])),
     ...degrees.map((degree) => degree.link),
     ...courses.map((course) => course.link),
   ];
 
-  it('gives every company, school and course an absolute http(s) URL', () => {
-    expect(links.length).toBe(work.length + degrees.length + courses.length);
+  it('gives every published company, school and course an absolute http(s) URL', () => {
+    expect(links.length).toBe(
+      work.filter((job) => job.url).length + degrees.length + courses.length,
+    );
     for (const link of links) {
       const url = new URL(link);
 
@@ -201,14 +203,15 @@ describe('print: resume link data', () => {
     }
   });
 
-  it.each([
-    ['Arthena', 'https://www.ycombinator.com/companies/arthena'],
-    [
-      'Planetary Resources',
-      'https://en.wikipedia.org/wiki/Planetary_Resources',
-    ],
-  ])('uses a stable destination for retired company %s', (name, expected) => {
-    expect(work.find((position) => position.name === name)?.url).toBe(expected);
+  it('does not invent a company website the résumé does not name', () => {
+    expect(
+      work.find((position) => position.name === 'YouCode Technologies Corp')
+        ?.url,
+    ).toBeUndefined();
+    expect(
+      work.find((position) => position.name === 'Sharks Billiard Association')
+        ?.url,
+    ).toBeUndefined();
   });
 
   it.each([
@@ -239,13 +242,12 @@ describe('print: resume link data', () => {
     });
   });
 
-  it('uses canonical HTTPS company URLs where the site publishes one', () => {
-    expect(work.find((position) => position.name === 'Smile ID')?.url).toBe(
-      'https://smile.id',
-    );
-    expect(
-      work.find((position) => position.name === 'Skeptical Investments')?.url,
-    ).toBe('https://skepticalinvestments.biz');
+  it('names the employers from the résumé without inventing sites', () => {
+    expect(work.map((position) => position.name)).toEqual([
+      'YouCode Technologies Corp',
+      'Sharks Billiard Association',
+    ]);
+    expect(work.every((position) => position.url === undefined)).toBe(true);
   });
 });
 
@@ -261,12 +263,13 @@ describe('print: contact block', () => {
     return block as HTMLElement;
   }
 
-  it('carries location, site, email, GitHub and LinkedIn', () => {
+  it('carries location, phones, email, GitHub and LinkedIn', () => {
     const text = contactBlock().textContent ?? '';
 
     expect(text).toContain(profile.currentCity);
-    expect(text).toContain(profile.email);
-    expect(text).toContain('mldangelo.com');
+    expect(text).toContain('+63 945 560 0851');
+    expect(text).toContain('+63 991 339 1337');
+    expect(text).toContain('manilarayandrew@gmail.com');
     expect(text).toContain('github.com/mldangelo');
     expect(text).toContain('linkedin.com/in/');
   });
@@ -295,7 +298,7 @@ describe('print: contact block', () => {
       rule.selectors.includes('.resume-print-contact > *'),
     );
 
-    expect(block.children).toHaveLength(5);
+    expect(block.children).toHaveLength(6);
     expect(block.querySelector('[aria-hidden="true"]')).toBeNull();
 
     // A separator carried inside an entry lands wherever that entry lands, so
