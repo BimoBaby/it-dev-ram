@@ -16,7 +16,7 @@ export default function Navigation() {
   return (
     <header className="site-header">
       <Link href="/" className="site-logo" aria-label={`${AUTHOR_NAME} — home`}>
-        <span className="logo-text">md</span>
+        <span className="logo-text">RM</span>
       </Link>
 
       <nav className="nav-links" aria-label="Primary">
